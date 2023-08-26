@@ -40,11 +40,11 @@ contexts[] {
       : include "floatingPoints" ;
       : include "integers" ;
       : pattern {
-         regex \= (\b(SELECT|STREAM|FROM|DECLARE|STORAGE|FILE))
+         regex \= (\b(select|SELECT|stream|STREAM|from|FROM|declare|DECLARE|storage|STORAGE|file|FILE))
          styles [] = .keyword;
       }
       : pattern {
-         regex \= (\b(INTEGER|BYTE|CHAR|UINT|STRING|FLOAT|DOUBLE))
+         regex \= (\b(Integer|INTEGER|Byte|BYTE|Char|CHAR|Uint|UINT|String|STRING|Float|FLOAT|Double|DOUBLE))
          styles [] = .type;
       }
       : pattern {

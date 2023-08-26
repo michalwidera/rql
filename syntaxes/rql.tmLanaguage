@@ -41,13 +41,13 @@
         </dict>
         <dict>
           <key>match</key>
-          <string>(\b(SELECT|STREAM|FROM|DECLARE|STORAGE|FILE))</string>
+          <string>(\b(select|SELECT|stream|STREAM|from|FROM|declare|DECLARE|storage|STORAGE|file|FILE))</string>
           <key>name</key>
           <string>keyword.rql</string>
         </dict>
         <dict>
           <key>match</key>
-          <string>(\b(INTEGER|BYTE|CHAR|UINT|STRING|FLOAT|DOUBLE))</string>
+          <string>(\b(Integer|INTEGER|Byte|BYTE|Char|CHAR|Uint|UINT|String|STRING|Float|FLOAT|Double|DOUBLE))</string>
           <key>name</key>
           <string>type.rql</string>
         </dict>
