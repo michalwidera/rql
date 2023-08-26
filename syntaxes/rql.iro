@@ -1,0 +1,95 @@
+#################################################################
+## Iro
+################################################################ 
+##
+## * Press Ctrl + '+'/'-' To Zoom in
+## * Press Ctrl + S to save and recalculate... 
+## * Documents are saved to web storage.
+## * Only one save slot supported.
+## * Matches cannot span lines.
+## * Unicode chars must be defined in \u0000 to \uffff format.
+## * All matches must be contained by a single group ( ... )
+## * Look behinds not permitted, (?<= or (?<!
+## * Look forwards are permitted (?= or (?!
+## * Constants are defined as __my_const = (......)
+## * The \= format allows unescaped regular expressions
+## * Constants referenced by match \= $${__my_const}
+## * Constants can reference other constants
+## * You are free to delete all the default scopes.
+## * Twitter : ainslec , Web: http://eeyo.io/iro
+##
+################################################################
+
+name                   = rql
+file_extensions []     = rql, desc;
+textmate_compatible    = true
+
+
+styles[] {
+   .comment  : style color = "light_green" textmate_scope = "comment";
+   .keyword  : style color = "#FF6666"     textmate_scope = "keyword";
+   .type     : style color = "#33FFFF"     textmate_scope = "type";
+   .desc     : style color = "white"       textmate_scope = "desc";
+   .quoted   : style color = "orange"      textmate_scope = "quoted";
+   .numeric  : style color = "#FF66FF"     textmate_scope = "numeric";
+}
+contexts[] {
+
+   main : context {
+      : include "multi_line_comment" ;
+      : include "floatingPoints" ;
+      : include "integers" ;
+      : pattern {
+         regex \= (\b(SELECT|STREAM|FROM|DECLARE|STORAGE|FILE))
+         styles [] = .keyword;
+      }
+      : pattern {
+         regex \= (\b(INTEGER|BYTE|CHAR|UINT|STRING|FLOAT|DOUBLE))
+         styles [] = .type;
+      }
+      : pattern {
+         regex \= (\b(REF|TYPE))
+         styles [] = .desc;
+      }
+      : pattern {
+         regex \= (^# .*)|(^//.*)
+         styles [] = .comment;
+      }
+      : inline_push {
+         regex \= (\')
+         styles [] = .quoted;
+         default_style = .quoted
+         : pop {
+            regex  \= (\')
+            styles [] = .quoted;
+         }
+      }
+   }
+
+   multi_line_comment : context {
+      description        = multiline
+      : inline_push {
+         regex          \= (/\*)
+         styles []       = .comment;
+         default_style   = .comment
+         : pop {
+            regex       \= (\*/)
+            styles []    = .comment;
+         }
+      }
+   }
+
+   floatingPoints : context {
+      : pattern {
+         regex          \= (\b[0-9][0-9]*)(\.)(\b[0-9][0-9]*)
+         styles []       = .numeric;
+      }
+   }
+   
+   integers : context {
+      : pattern {
+         regex          \= (\b[0-9][0-9]*)
+         styles []       = .numeric;
+      }
+   }
+}
