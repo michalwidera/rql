@@ -1,3 +1,4 @@
+
 #################################################################
 ## Iro
 ################################################################ 
@@ -40,7 +41,7 @@ contexts[] {
       : include "floatingPoints" ;
       : include "integers" ;
       : pattern {
-         regex \= (\b(select|SELECT|stream|STREAM|from|FROM|declare|DECLARE|storage|STORAGE|file|FILE))
+         regex \= (\b(select|SELECT|stream|STREAM|from|FROM|declare|DECLARE|storage|STORAGE|file|FILE|retention|RETENTION))
          styles [] = .keyword;
       }
       : pattern {
